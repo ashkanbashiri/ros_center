@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>RAD Lab Web Application</title>
+</h:head>
+<h:body>
+	<ui:composition template="/template/commonLayout.xhtml">
+		<ui:define name="title">RAD LAB WEB APP</ui:define>
+		<ui:define name="header">
+		</ui:define>
+		<ui:define name="content">
+			<h:form>
+				<h3 style="margin-top: 0; text-align:center;">RAD LAB WEB APPLICATION</h3>
+				<hr />
+				<h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();"
+					title="login">
+					<p:graphicImage name="/images/radlab2.jpg" />
+				</h:outputLink>
+
+				<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+				<p:dialog header="Login" widgetVar="dlg" resizable="false">
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputLabel for="username" value="Username:" />
+						<p:inputText id="username" value="#{userLoginView.username}"
+							required="true" label="username" />
+
+						<h:outputLabel for="password" value="Password:" />
+						<p:password id="password" value="#{userLoginView.password}"
+							required="true" label="password" />
+
+						<f:facet name="footer">
+							<p:commandButton value="Login" update="growl"
+								actionListener="#{userLoginView.login}"
+								oncomplete="handleLoginRequest(xhr, status, args)" />
+						</f:facet>
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
+
+			<script type="text/javascript">
+				function handleLoginRequest(xhr, status, args) {
+					if (args.validationFailed || !args.loggedIn) {
+						PF('dlg').jq.effect("bounce", {
+							times : 5
+						}, 100);
+					} else {
+						PF('dlg').hide();
+						$('#loginLink').fadeOut();
+					}
+				}
+			</script>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

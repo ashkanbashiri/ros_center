@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Robot Motion Menu</title>
+</h:head>
+<h:body>
+	<ui:composition template="/template/commonLayout.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<p:growl id="messages" showDetail="true" />
+
+				<hr />
+				<p:panelGrid columns="4">
+					<p:commandButton value="Enable Baxter"
+						actionListener="#{taskRunner.enableBaxter}">
+					</p:commandButton>
+					<p:commandButton value="Disable Baxter"
+						actionListener="#{taskRunner.stopBaxter}">
+					</p:commandButton>
+					<p:commandButton value="Untuck Arms"
+						actionListener="#{taskRunner.untuck}">
+					</p:commandButton>
+					<p:commandButton value="Tuck Arms"
+						actionListener="#{taskRunner.tuck}">
+					</p:commandButton>
+
+				</p:panelGrid>
+				<p:slideMenu style="width:270px" rendered="false">
+					<p:submenu label="Motion Selection" icon="ui-icon-refresh">
+						<p:menuitem value="Sequential"
+							actionListener="#{menuView.sequential}" update="messages"
+							icon="ui-icon-disk" />
+						<p:menuitem value="Circular" actionListener="#{menuView.circular}"
+							update="messages" icon="ui-icon-arrowrefresh-1-w" />
+						<p:menuitem value="Conditional"
+							actionListener="#{menuView.conditional}" update="messages"
+							icon="ui-icon-close" />
+					</p:submenu>
+
+					<p:separator />
+					<p:menuitem value="Predefined Motions"
+						actionListener="#{menuView.circular}"
+						icon="ui-icon-arrowrefresh-1-w" />
+					<p:menuitem value="Settings" actionListener="#{menuView.circular}"
+						icon="ui-icon-arrowrefresh-1-w" />
+
+				</p:slideMenu>
+
+
+				<h3 style="margin-top: 0">Pick your Motions!</h3>
+
+				<p:accordionPanel>
+					<p:tab
+						title="Sequential Motions: Pick a set of motions to run on the Robot!">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage name="/images/baxter.jpg" />
+							<p:graphicImage name="/images/fsm.png" />
+						</h:panelGrid>
+						<p:pickList id="pickList1" value="#{pickListView.motions}"
+							var="motions" itemLabel="#{motions}" itemValue="motions" />
+						<p:commandButton id="motionSubmit1" value="Submit"
+							style="margin-top:5px" />
+					</p:tab>
+
+
+					<p:tab
+						title="Circular Motions: Pick a set of motions to circle through!">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage name="/images/baxter.jpg" />
+							<p:graphicImage name="/images/cycle.gif" />
+						</h:panelGrid>
+						<p:pickList id="pickList2" value="#{pickListView.motions}"
+							var="motions" itemLabel="#{motions}" itemValue="motions" />
+						<p:commandButton id="motionSubmit2" value="Submit"
+							style="margin-top:5px" />
+					</p:tab>
+
+
+					<p:tab title="Conditional Motions: Pick motions and rules!">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage name="/images/baxter.jpg" />
+							<p:graphicImage name="/images/conditional.jpg" />
+						</h:panelGrid>
+						<p:pickList id="pickList3" value="#{pickListView.motions}"
+							var="motions" itemLabel="#{motions}" itemValue="motions" />
+						<p:commandButton id="motionSubmit3" value="Submit"
+							style="margin-top:5px" />
+					</p:tab>
+				</p:accordionPanel>
+
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

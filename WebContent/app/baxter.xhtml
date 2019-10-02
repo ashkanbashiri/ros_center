@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>BAXTER Motion Menu</title>
+</h:head>
+<h:body>
+	<ui:composition template="/template/commonLayout.xhtml">
+		<ui:define name="title">BAXTER Motion Menu</ui:define>
+		<ui:define name="content">
+			<h:form>
+
+				<p:accordionPanel>
+					<p:tab title="Control Menu">
+						<p:growl id="msg" showDetail="true" escape="false" />
+
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:pickList id="PojoPickList" value="#{pickListView.motions}"
+								var="motion" itemValue="#{motion}" itemLabel="#{motion}"
+								showSourceControls="true" showTargetControls="true"
+								showCheckbox="true" showSourceFilter="true"
+								showTargetFilter="true" filterMatchMode="contains">
+
+								<f:facet name="sourceCaption">Available Motions</f:facet>
+								<f:facet name="targetCaption">Selected Motions</f:facet>
+								<p:ajax event="transfer" listener="#{pickListView.onTransfer}"
+									update="@form" />
+							</p:pickList>
+							<p:column>
+								<h:panelGrid columns="3" cellpadding="5" class="ui-grid">
+									<h:outputLabel for="q" value="SPACE: " />
+									<p:spinner id="q" value="#{pickListView.q}" stepFactor="0.1"
+									 min="0.1">
+										<p:ajax listener="#{pickListView.updateHelp()}"
+											process="@this" update="@form"></p:ajax>
+									</p:spinner>
+									<p:outputLabel value="#{pickListView.space}"></p:outputLabel>
+
+
+									<h:outputLabel for="r" value="WEIGHT: " />
+									<p:spinner id="r" value="#{pickListView.r}" stepFactor="0.1"
+										 min="0.1">
+										<p:ajax listener="#{pickListView.updateHelp()}"
+											process="@this" update="@form"></p:ajax>
+									</p:spinner>
+									<p:outputLabel value="#{pickListView.weight}"></p:outputLabel>
+
+
+									<h:outputLabel for="p" value="TIME: " />
+									<p:spinner id="p" value="#{pickListView.p}" stepFactor="0.1"
+										min="0.1">
+										<p:ajax listener="#{pickListView.updateHelp()}"
+											process="@this" update="@form"></p:ajax>
+									</p:spinner>
+									<p:outputLabel value="#{pickListView.time}"></p:outputLabel>
+
+									<h:outputLabel for="s" value="FLOW: " />
+									<p:spinner id="s" value="#{pickListView.s}" stepFactor="0.1"
+										min="0.1">
+										<p:ajax listener="#{pickListView.updateHelp()}"
+											process="@this" update="@form"></p:ajax>
+									</p:spinner>
+									<p:outputLabel value="#{pickListView.flow}"></p:outputLabel>
+
+									<p:commandButton value="Verify"
+									actionListener="#{pickListView.verify}" update="@form">
+									</p:commandButton>
+									<p:commandButton value="Submit"
+										actionListener="#{taskRunner.movementQuality}" update="@form">
+									</p:commandButton>
+								</h:panelGrid>
+							</p:column>
+						</h:panelGrid>
+						<hr></hr>
+						<center> <p:lightBox styleClass="imagebox" id="lighbox1">
+							<h:outputLink
+								value="../resources/images/motion_menu.png"
+								title="Finite State Machine">
+								<h:graphicImage style="vertical-align:middle"
+									name="/images/motion_menu.png" width="600" />
+							</h:outputLink>
+						</p:lightBox> </center>
+					</p:tab>
+
+
+					<p:tab title="Sample Programs">
+						<p:panelGrid columns="9">
+							<p:commandButton value="Enable Baxter"
+								actionListener="#{taskRunner.enableBaxter}">
+							</p:commandButton>
+							<p:commandButton value="Disable Baxter"
+								actionListener="#{taskRunner.stopBaxter}">
+							</p:commandButton>
+							<p:commandButton value="Untuck Arms"
+								actionListener="#{taskRunner.untuck}">
+							</p:commandButton>
+							<p:commandButton value="Tuck Arms"
+								actionListener="#{taskRunner.tuck}">
+							</p:commandButton>
+							<p:commandButton value="Listen for Mocap Data"
+								actionListener="#{taskRunner.mocapLaunch}">
+							</p:commandButton>
+							<p:commandButton value="Four Corners Demo"
+								actionListener="#{taskRunner.fourCorners}">
+							</p:commandButton>
+							<p:commandButton value="Canon Demo"
+								actionListener="#{taskRunner.canon}">
+							</p:commandButton>
+							<p:commandButton value="Puppet Mode Left"
+								actionListener="#{taskRunner.puppetLeftArm}">
+							</p:commandButton>
+							<p:commandButton value="Puppet Mode Right"
+								actionListener="#{taskRunner.puppetRightArm}">
+							</p:commandButton>
+
+						</p:panelGrid>
+					</p:tab>
+					<!--
+					<p:tab
+						title="Circular Motions: Pick a set of motions to circle through!">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage name="/images/baxter.jpg" />
+							<p:graphicImage name="/images/cycle.gif" />
+						</h:panelGrid>
+						<p:pickList id="pickList2" value="#{pickListView.motions}"
+							var="motions" itemLabel="#{motions}" itemValue="motions" />
+						<p:commandButton id="motionSubmit2" value="Submit"
+							style="margin-top:5px" />
+					</p:tab>
+
+
+					<p:tab title="Conditional Motions: Pick motions and rules!">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage name="/images/baxter.jpg" />
+							<p:graphicImage name="/images/conditional.jpg" />
+						</h:panelGrid>
+						<p:pickList id="pickList3" value="#{pickListView.motions}"
+							var="motions" itemLabel="#{motions}" itemValue="motions" />
+						<p:commandButton id="motionSubmit3" value="Submit"
+							style="margin-top:5px" />
+					</p:tab>
+					-->
+				</p:accordionPanel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14185964372910" configfile="/Demo/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="72" y="300" id="pf14207197375550" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14207197375551" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="app/nao.xhtml" x="216" y="120" id="pf14207197375552" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14207197375551" path="/app/nao.xhtml"/>
+  <links id="pf14207197375551" target="pf14207197375552" source="pf14207197375550" outcome="ok" redirect="true" fromaction="#{userLoginView.login}"/>
+</pageflow:Pageflow>

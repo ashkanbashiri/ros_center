@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>NAO Motion Menu</title>
+</h:head>
+<h:body>
+	<ui:composition template="/template/commonLayout.xhtml">
+		<ui:define name="header"></ui:define>
+		<ui:define name="content">
+			<h:form>
+				<p:growl id="messages" showDetail="true" life="3000" />
+
+				<hr />
+				<p:panelGrid columns="9">
+					<p:commandButton value="Enslave" update="messages"
+						actionListener="#{taskRunner.naoEnslave}">
+					</p:commandButton>
+					<p:commandButton value="Un-Enslave" update="messages"
+						actionListener="#{taskRunner.naoUnEnslave}">
+					</p:commandButton>
+					<p:commandButton value="Greetings" update="messages"
+						actionListener="#{taskRunner.naoGreetings}">
+					</p:commandButton>
+					<p:commandButton value="Wave" update="messages"
+						actionListener="#{taskRunner.naoWave}">
+					</p:commandButton>
+					<p:commandButton value="Sit" update="messages"
+						actionListener="#{taskRunner.naoSit}">
+					</p:commandButton>
+					<p:commandButton value="SitRelax" update="messages"
+						actionListener="#{taskRunner.naoSitRelax}">
+					</p:commandButton>
+					<p:commandButton value="Stand" update="messages"
+						actionListener="#{taskRunner.naoStand}">
+					</p:commandButton>
+					<p:commandButton value="Crouch" update="messages"
+						actionListener="#{taskRunner.naoCrouch}">
+					</p:commandButton>
+
+
+				</p:panelGrid>
+				<hr />
+				<p:commandButton value="Take a Picture" update="messages"
+					actionListener="#{taskRunner.takePicture}">
+				</p:commandButton>
+				<p:commandButton value="Show Picture" type="button"
+					onclick="PF('dlg3').show();" />
+				<p:dialog header="NAO Took This Picture!" widgetVar="dlg3"
+					height="400">
+					<p:graphicImage name="/images/camImage.png"></p:graphicImage>
+
+				</p:dialog>
+
+				<p:graphicImage name="/images/nao2.jpg"></p:graphicImage>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

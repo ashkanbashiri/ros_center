@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>RAD Lab Web Application</title>
+</h:head>
+<body>
+	<ui:composition>
+		<h:form>
+			<!-- 
+		<p:dock position="top">
+			<p:menuitem value="Home" icon="/resources/images/home.png"
+				url="/login.jsf" />
+			<p:menuitem value="Baxter" icon="/resources/images/baxter.jpg"
+				url="/app/baxter.jsf" />
+			<p:menuitem value="NAO" icon="/resources/images/nao.jpg"
+				url="/app/nao.jsf" />
+			<p:menuitem value="Tutorials" icon="/resources/images/tutorials.jpg"
+				url="/app/tutorials.jsf" />
+		</p:dock>
+		 -->
+			<!-- <p:sticky target="tb"></p:sticky> -->
+			<p:toolbar id="tb">
+				<f:facet name="left">
+					<p:commandButton type="button" title="Load Trajectory"
+						value="Load Trajectory"
+						actionListener="#{pickListView.loadTrajectory}"
+						icon="ui-icon-folder-open" />
+					<p:commandButton title="Save Trajectory" value="Save Trajectory"
+						actionListener="#{pickListView.saveTrajectory}" icon="ui-icon-disk" />
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+					<!-- <p:outputLabel for="ts" value="Switch Theme:"></p:outputLabel>
+					<p:themeSwitcher id="ts" style="margin-top:10px;">
+						<f:selectItem itemLabel="Choose Theme" itemValue="" />
+						<f:selectItems value="#{themeChoices.themes}" />
+					</p:themeSwitcher> -->
+					<p:graphicImage style="margin-left: 200px"
+						value="/resources/images/uva_icon.jpg" width="150px">
+					</p:graphicImage>
+					<p:graphicImage style="margin-left: 20px;margin-top: 10px"
+						value="/resources/images/radlab_logo.jpg" width="100px">
+					</p:graphicImage>
+				</f:facet>
+
+				<f:facet name="right">
+				<p:outputLabel value="welcome #{userLoginView.username}"></p:outputLabel>
+					<p:commandButton title="logout" icon="ui-icon-power" value="Logout"
+						actionListener="#{userLoginView.logout}" />
+				</f:facet>
+			</p:toolbar>
+		</h:form>
+	</ui:composition>
+
+</body>
+</html>
